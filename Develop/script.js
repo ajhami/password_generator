@@ -1,5 +1,33 @@
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
+var minusLen = document.querySelector("#minus");
+var plusLen = document.querySelector("#plus");
+var lenEl = document.querySelector("#count");
+
+var lengthOfPassword = 12;
+
+plusLen.addEventListener("click", function() {
+  if(lengthOfPassword < 128) {  
+    lengthOfPassword++;
+    lenEl.textContent = lengthOfPassword;
+    console.log("length of password = " + lengthOfPassword);
+  }
+});
+
+minusLen.addEventListener("click", function() {
+  if(lengthOfPassword > 8) {
+    lengthOfPassword--;
+    lenEl.textContent = lengthOfPassword;
+    console.log("length of password = " + lengthOfPassword);
+  }
+}); 
+
+
+
+
+
+
+
+
 
 
 
@@ -10,8 +38,8 @@ function writePassword() {
   // Criteria
   
   // Password of length between 8 and 128
-  var lengthOfPassword = prompt("Enter the length of password (must be between 8 and 128 characters.)");
-  console.log("typeof lengthOfPassword = " + typeof lengthOfPassword);
+  //var lengthOfPassword = prompt("Enter the length of password (must be between 8 and 128 characters.)");
+  alert("Length of password was determined on screen.\nOther specifications to be added to web interface.");
   //var lengthOfPassword = 8;
 
   // lowercase
