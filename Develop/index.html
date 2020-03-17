@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="wrapper">
@@ -31,10 +32,95 @@
                 +
               </button>
             </div>
-        
           </section>
 
+          <br>
 
+          <section class="col-12 selection_content">
+            <h3>
+              Include:
+            </h3>
+
+            <hr>
+
+            <div class="row">
+              
+              <p class="col-md-2 include_text">
+                Lower Case Letters?
+              </p>
+              <select class="col-md-2" id="lowerCaseSelect">
+                <option value="empty">
+                  --
+                </option>
+                <option value="yes">
+                  Yes
+                </option>
+                <option value="no">
+                  No
+                </option>
+              </select>
+
+              <div class="col-md-2"></div>
+
+              <p class="col-md-2 include_text">
+                Upper Case Letters?
+              </p>
+              <select class="col-md-2" id="upperCaseSelect">
+                <option value="empty">
+                  --
+                </option>
+                <option value="yes">
+                  Yes
+                </option>
+                <option value="no">
+                  No
+                </option>
+              </select>
+
+            </div>
+
+            <br>
+
+            <div class="row">
+              
+              <p class="col-md-2 include_text">
+                Numbers?
+              </p>
+              <select class="col-md-2" id="numberSelect">
+                <option value="empty">
+                  --
+                </option>
+                <option value="yes">
+                  Yes
+                </option>
+                <option value="no">
+                  No
+                </option>
+              </select>
+
+              <div class="col-md-2"></div>
+
+              <p class="col-md-2 include_text">
+                Special Characters?
+              </p>
+              <select class="col-md-2" id="specialSelect">
+                <option value="empty">
+                  --
+                </option>
+                <option value="yes">
+                  Yes
+                </option>
+                <option value="no">
+                  No
+                </option>
+              </select>
+
+            </div>
+
+            
+            
+          </section>
+          
           <textarea
             readonly
             id="password"

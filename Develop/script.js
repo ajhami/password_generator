@@ -1,10 +1,23 @@
+// HTML Elements
 var generateBtn = document.querySelector("#generate");
 var minusLen = document.querySelector("#minus");
 var plusLen = document.querySelector("#plus");
 var lenEl = document.querySelector("#count");
+var lowerCaseSelect = document.querySelector("#lowerCaseSelect"); 
+var upperCaseSelect = document.querySelector("#upperCaseSelect");
+var numberSelect = document.querySelector("#numberSelect"); 
+var specialSelect = document.querySelector("#specialSelect");  
 
+
+// Password Specification Variables
 var lengthOfPassword = 12;
+var includeLowerCase = false;
+var includeUpperCase = false;
+var includeNumbers = false;
+var includeSpecialCharacters = false;
 
+
+// Event Listeners for Password Specifications
 plusLen.addEventListener("click", function() {
   if(lengthOfPassword < 128) {  
     lengthOfPassword++;
@@ -21,44 +34,78 @@ minusLen.addEventListener("click", function() {
   }
 }); 
 
+lowerCaseSelect.addEventListener("change", function(event){
+  var value = event.target.value;
+  if(value === "yes") {
+    includeLowerCase = true;
+  }
+  else {
+    includeLowerCase = false;
+  }
+  console.log("lowercaseselect = " + includeLowerCase);
+});
+
+upperCaseSelect.addEventListener("change", function(event){
+  var value = event.target.value;
+  if(value === "yes") {
+    includeUpperCase = true;
+  }
+  else {
+    includeUpperCase = false;
+  }
+  console.log("uppercaseselect = " + includeUpperCase);
+});
+
+numberSelect.addEventListener("change", function(event){
+  var value = event.target.value;
+  if(value === "yes") {
+    includeNumbers = true;
+  }
+  else {
+    includeNumbers = false;
+  }
+  console.log("numberselect = " + includeNumbers);
+});
+
+specialSelect.addEventListener("change", function(event){
+  var value = event.target.value;
+  if(value === "yes") {
+    includeSpecialCharacters = true;
+  }
+  else {
+    includeSpecialCharacters = false;
+  }
+  console.log("lowercaseselect = " + includeSpecialCharacters);
+});
 
 
-
-
-
-
-
-
-
-
-
-// Write password to the #password input
+// Write password to the password input
 function writePassword() {
 
   // Criteria
   
   // Password of length between 8 and 128
   //var lengthOfPassword = prompt("Enter the length of password (must be between 8 and 128 characters.)");
-  alert("Length of password was determined on screen.\nOther specifications to be added to web interface.");
+  //alert("Length of password was determined on screen.\nOther specifications to be added to web interface.");
   //var lengthOfPassword = 8;
 
   // lowercase
-  var includeLowerCase = confirm("Would you like to include lowercase letters? (Yes or No)");
+  //var includeLowerCase = confirm("Would you like to include lowercase letters? (Yes or No)");
   //var includeLowerCase = "Yes";
 
   // uppercase
-  var includeUpperCase = confirm("Would you like to include uppercase letters? (Yes or No)");
+  //var includeUpperCase = confirm("Would you like to include uppercase letters? (Yes or No)");
   //var includeUpperCase = "Yes";
 
   // numbers
-  var includeNumbers = confirm("Would you like to include numbers? (Yes or No)");
+  //var includeNumbers = confirm("Would you like to include numbers? (Yes or No)");
   //var includeNumbers = "Yes";
   //console.log(includeNumbers);
 
   // special characters
-  var includeSpecialCharacters = confirm("Would you like to include Special Characters? (Yes or No)");
+  //var includeSpecialCharacters = confirm("Would you like to include Special Characters? (Yes or No)");
   //var includeSpecialCharacters = true;
-  console.log(includeSpecialCharacters);
+  //console.log(includeSpecialCharacters);
 
 
   // Listing the 15 different password preference combinations
@@ -212,7 +259,7 @@ function writePassword() {
 
       var passwordArray = password.split("");
 
-      console.log("Contains Numbers = " + containsChecker(passwordArray, specialCharsArray));
+      console.log("Contains $ = " + containsChecker(passwordArray, specialCharsArray));
       ////////
     }
 
