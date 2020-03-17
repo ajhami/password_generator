@@ -7,15 +7,12 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
 
-  //////////////////////////////////////////////
   // Criteria
   
   // Password of length between 8 and 128
   var lengthOfPassword = prompt("Enter the length of password (must be between 8 and 128 characters.)");
+  console.log("typeof lengthOfPassword = " + typeof lengthOfPassword);
   //var lengthOfPassword = 8;
-
-  
-  // Character types to include
 
   // lowercase
   var includeLowerCase = confirm("Would you like to include lowercase letters? (Yes or No)");
@@ -35,42 +32,57 @@ function writePassword() {
   //var includeSpecialCharacters = true;
   console.log(includeSpecialCharacters);
 
-  ////////////////////////////////////////////////
 
-
-
+  // Listing the 15 different password preference combinations
+  // and creating arrays to draw from for password creation
 
   // Password character type preference options
+  // 1 - lowercase letters
   var lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
   var lowerCaseLettersArray = lowerCaseLetters.split("");
+  // 2 - uppercase letters
   var upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var upperCaseLettersArray = upperCaseLetters.split("");
+  // 3 - numbers
   var numbers = "0123456789";
   var numbersArray = numbers.split("");
+  // 4 - special characters
   var specialChars = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
   var specialCharsArray = specialChars.split("");
 
   // Possible character preference combination arrays
+
+  // 5 - all letters
   var allLetters = lowerCaseLetters + upperCaseLetters;
   var allLettersArray = allLetters.split("");
+  // 6 - lowercase letters and numbers
   var lowerLettersAndNumbers = lowerCaseLetters + numbers;
   var lowerLettersAndNumbersArray = lowerLettersAndNumbers.split("");
+  // 7 - uppercase letters and numbers
   var upperLettersAndNumbers = upperCaseLetters + numbers;
   var upperLettersAndNumbersArray = upperLettersAndNumbers.split("");
+  // 8 - all letters and numbers
   var allLettersAndNumbers = allLetters + numbers;
   var allLettersAndNumbersArray = allLettersAndNumbers.split("");
+  // 9 - lowercase letters and special characters
   var lowerLettersAndSpecials = lowerCaseLetters + specialChars;
   var lowerLettersAndSpecialsArray = lowerLettersAndSpecials.split("");
+  // 10 - uppercase letters and special characters
   var upperLettersAndSpecials = upperCaseLetters + specialChars;
   var upperLettersAndSpecialsArray = upperLettersAndSpecials.split("");
+  // 11 - all letters and special characters
   var allLettersAndSpecials = allLetters + specialChars;
   var allLettersAndSpecialsArray = allLettersAndSpecials.split("");
+  // 12 - numbers and special characters
   var numbersAndSpecials = numbers + specialChars;
   var numbersAndSpecialsArray = numbersAndSpecials.split("");
+  // 13 - lowercase letters, numbers, and special characters
   var lowersNumbersandSpecials = lowerCaseLetters + numbersAndSpecials;
   var lowersNumbersandSpecialsArray = lowersNumbersandSpecials.split("");
+  // 14 - uppercase letters, numbers, and special characters;
   var uppersNumbersandSpecials = upperCaseLetters + numbersAndSpecials;
   var uppersNumbersandSpecialsArray = uppersNumbersandSpecials.split("");
+  // 15 - all character types
   var allCharacters = lowerCaseLetters + upperCaseLetters + numbers + specialChars;
   var allCharactersArray = allCharacters.split("");
 
@@ -96,341 +108,359 @@ function writePassword() {
 
   var passwordArray = [];
 
-  // 1
-  // User wants to use only lowercase letters
-  if(includeLowerCase && !includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
-
-    var password = generatePassword(lengthOfPassword, lowerCaseLettersArray);
-
-    ///////// 
-    // Just for log checks
-    console.log("Lower Case Letters Only!\n\n");
-    console.log("password = " + password);
-
-    var passwordArray = password.split("");
-
-    console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray));  
-    ///////// 
+  if(lengthOfPassword < 8 || lengthOfPassword > 128){
+    alert("Please enter a password length between 8 and 128.")
   }
 
-  // 2
-  // User wants to use only uppercase letters
-  else if(!includeLowerCase && includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
+  else {
 
-    var password = generatePassword(lengthOfPassword, upperCaseLettersArray);
+    // If the user doesn't select any of the character preferences
+    if(!includeLowerCase && !includeUpperCase && !includeNumbers && !includeSpecialCharacters){
+      alert("Please select at least one character type to include in your new password.");
+      return;
+    }
 
-    ///////// 
-    // Just for log checks
-    console.log("Upper Case Letters Only!\n\n");
-    console.log("password = " + password);
+    // 1
+    // User wants to use only lowercase letters
+    else if(includeLowerCase && !includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
 
-    var passwordArray = password.split("");
+      var password = generatePassword(lengthOfPassword, lowerCaseLettersArray);
 
-    console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray));
-    ////////
-  }
+      ///////// 
+      // Just for log checks
+      console.log("Lower Case Letters Only!\n\n");
+      console.log("password = " + password);
 
-  // 3
-  // User wants to use only numbers
-  else if(!includeLowerCase && !includeUpperCase && includeNumbers && !includeSpecialCharacters) {
+      var passwordArray = password.split("");
 
-    var password = generatePassword(lengthOfPassword, numbersArray);
+      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray));  
+      ///////// 
+    }
 
-    ///////// 
-    // Just for log checks
-    console.log("Numbers Only!\n\n");
-    console.log("password = " + password);
+    // 2
+    // User wants to use only uppercase letters
+    else if(!includeLowerCase && includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
 
-    var passwordArray = password.split("");
+      var password = generatePassword(lengthOfPassword, upperCaseLettersArray);
 
-    console.log("Contains Numbers = " + containsChecker(passwordArray, numbersArray));
-    ////////
-  }
+      ///////// 
+      // Just for log checks
+      console.log("Upper Case Letters Only!\n\n");
+      console.log("password = " + password);
 
-  // 4
-  // User wants to use only special characters
-  else if(!includeLowerCase && !includeUpperCase && !includeNumbers && includeSpecialCharacters) {
+      var passwordArray = password.split("");
 
-    var password = generatePassword(lengthOfPassword, specialCharsArray);
+      console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray));
+      ////////
+    }
 
-    ///////// 
-    // Just for log checks
-    console.log("Special Characters Only!\n\n");
-    console.log("password = " + password);
+    // 3
+    // User wants to use only numbers
+    else if(!includeLowerCase && !includeUpperCase && includeNumbers && !includeSpecialCharacters) {
 
-    var passwordArray = password.split("");
+      var password = generatePassword(lengthOfPassword, numbersArray);
 
-    console.log("Contains Numbers = " + containsChecker(passwordArray, specialCharsArray));
-    ////////
-  }
+      ///////// 
+      // Just for log checks
+      console.log("Numbers Only!\n\n");
+      console.log("password = " + password);
 
-  // 5
-  // User wants to use all letters
-  else if(includeLowerCase && includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
+      var passwordArray = password.split("");
+
+      console.log("Contains Numbers = " + containsChecker(passwordArray, numbersArray));
+      ////////
+    }
+
+    // 4
+    // User wants to use only special characters
+    else if(!includeLowerCase && !includeUpperCase && !includeNumbers && includeSpecialCharacters) {
+
+      var password = generatePassword(lengthOfPassword, specialCharsArray);
+
+      ///////// 
+      // Just for log checks
+      console.log("Special Characters Only!\n\n");
+      console.log("password = " + password);
+
+      var passwordArray = password.split("");
+
+      console.log("Contains Numbers = " + containsChecker(passwordArray, specialCharsArray));
+      ////////
+    }
+
+    // 5
+    // User wants to use all letters
+    else if(includeLowerCase && includeUpperCase && !includeNumbers && !includeSpecialCharacters) {
+    
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, upperCaseLettersArray)){
+
+        var password = generatePassword(lengthOfPassword, allLettersArray);
+
+        ///////// 
+        // Just for log checks
+        console.log("All Letters!\n\n");
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray));
+      }
+      /////////
+    }
+
+    // 6
+    // User wants to use lowercase letters and numbers
+    else if(includeLowerCase && !includeUpperCase && includeNumbers && !includeSpecialCharacters) {
+
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, numbersArray)){
+
+        var password = generatePassword(lengthOfPassword, lowerLettersAndNumbersArray);
+
+        ///////// 
+        // Just for log checks
+        console.log("Lower Case Letters and Numbers!\n\n");
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
+      }
+      /////////
+    }
+
+    // 7
+    // User wants to use uppercase letters and numbers
+    else if(!includeLowerCase && includeUpperCase && includeNumbers && !includeSpecialCharacters) {
+
+      while(!containsChecker(passwordArray, upperCaseLettersArray) || 
+            !containsChecker(passwordArray, numbersArray)){
+
+        var password = generatePassword(lengthOfPassword, upperLettersAndNumbersArray);
+
+        ///////// 
+        // Just for log checks
+        console.log("Upper Case Letters and Numbers!\n\n");
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
+      }
+      /////////
+    }
+
+    // 8
+    // User wants to use all letters and numbers
+    else if(includeLowerCase && includeUpperCase && includeNumbers && !includeSpecialCharacters) {
+    
+      console.log("All Letters and Numbers!\n\n");
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, upperCaseLettersArray) ||
+            !containsChecker(passwordArray, numbersArray)){
+
+        var password = generatePassword(lengthOfPassword, allLettersAndNumbersArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
+      }
+      /////////
+    }
+
+    // 9
+    // User wants to use lowercase letters and special characters
+    else if(includeLowerCase && !includeUpperCase && !includeNumbers && includeSpecialCharacters) {
+
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, lowerLettersAndSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+        console.log("Lower Case Letters and Special Characters!\n\n");
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
+
+    // 10
+    // User wants to use uppercase letters and special characters
+    else if(!includeLowerCase && includeUpperCase && !includeNumbers && includeSpecialCharacters) {
+
+      while(!containsChecker(passwordArray, upperCaseLettersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, upperLettersAndSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+        console.log("Upper Case Letters and Special Characters!\n\n");
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
+
+    // 11
+    // User wants to use all letters and special characters
+    else if(includeLowerCase && includeUpperCase && !includeNumbers && includeSpecialCharacters) {
+      
+      console.log("All Character Types!\n\n");
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, upperCaseLettersArray) ||
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, allLettersAndSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }  
+
+    // 12
+    // User wants to use numbers and special characters
+    else if(!includeLowerCase && !includeUpperCase && includeNumbers && includeSpecialCharacters) {
+      
+      console.log("All Character Types!\n\n");
+      while(!containsChecker(passwordArray, numbersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, numbersAndSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
+
+    // 13
+    // User wants to use lowercase letters, numbers, and special characters
+    else if(includeLowerCase && !includeUpperCase && includeNumbers && includeSpecialCharacters) {
+      
+      console.log("All Character Types!\n\n");
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) ||
+            !containsChecker(passwordArray, numbersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, lowersNumbersandSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
+
+    // 14
+    // User wants to use uppercase letters, numbers, and special characters
+    else if(!includeLowerCase && includeUpperCase && includeNumbers && includeSpecialCharacters) {
+      
+      console.log("All Character Types!\n\n");
+      while(!containsChecker(passwordArray, upperCaseLettersArray) ||
+            !containsChecker(passwordArray, numbersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, uppersNumbersandSpecialsArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
+
+    // 15
+    // User wants to use all character types
+    else if(includeLowerCase && includeUpperCase && includeNumbers && includeSpecialCharacters) {
+      
+      console.log("All Character Types!\n\n");
+      while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
+            !containsChecker(passwordArray, upperCaseLettersArray) ||
+            !containsChecker(passwordArray, numbersArray) || 
+            !containsChecker(passwordArray, specialCharsArray)){
+
+        var password = generatePassword(lengthOfPassword, allCharactersArray);
+
+        ///////// 
+        // Just for log checks
+
+        console.log("password = " + password);
+
+        var passwordArray = password.split("");
+
+        console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
+                    "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
+                    "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
+                    "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
+      }
+      /////////
+    }
   
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, upperCaseLettersArray)){
+    // Writing the generated password to the html password box
+    var passwordText = document.querySelector("#password");
 
-      var password = generatePassword(lengthOfPassword, allLettersArray);
+    passwordText.value = password;
 
-      ///////// 
-      // Just for log checks
-      console.log("All Letters!\n\n");
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray));
-    }
-    /////////
   }
-
-  // 6
-  // User wants to use lowercase letters and numbers
-  else if(includeLowerCase && !includeUpperCase && includeNumbers && !includeSpecialCharacters) {
-
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, numbersArray)){
-
-      var password = generatePassword(lengthOfPassword, lowerLettersAndNumbersArray);
-
-      ///////// 
-      // Just for log checks
-      console.log("Lower Case Letters and Numbers!\n\n");
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
-    }
-    /////////
-  }
-
-  // 7
-  // User wants to use uppercase letters and numbers
-  else if(!includeLowerCase && includeUpperCase && includeNumbers && !includeSpecialCharacters) {
-
-    while(!containsChecker(passwordArray, upperCaseLettersArray) || 
-          !containsChecker(passwordArray, numbersArray)){
-
-      var password = generatePassword(lengthOfPassword, upperLettersAndNumbersArray);
-
-      ///////// 
-      // Just for log checks
-      console.log("Upper Case Letters and Numbers!\n\n");
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
-    }
-    /////////
-  }
-
-  // 8
-  // User wants to use all letters and numbers
-  else if(includeLowerCase && includeUpperCase && includeNumbers && !includeSpecialCharacters) {
-  
-    console.log("All Letters and Numbers!\n\n");
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, upperCaseLettersArray) ||
-          !containsChecker(passwordArray, numbersArray)){
-
-      var password = generatePassword(lengthOfPassword, allLettersAndNumbersArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray));
-    }
-    /////////
-  }
-
-  // 9
-  // User wants to use lowercase letters and special characters
-  else if(includeLowerCase && !includeUpperCase && !includeNumbers && includeSpecialCharacters) {
-
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, lowerLettersAndSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-      console.log("Lower Case Letters and Special Characters!\n\n");
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
-  // 10
-  // User wants to use uppercase letters and special characters
-  else if(!includeLowerCase && includeUpperCase && !includeNumbers && includeSpecialCharacters) {
-
-    while(!containsChecker(passwordArray, upperCaseLettersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, upperLettersAndSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-      console.log("Upper Case Letters and Special Characters!\n\n");
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
-  // 11
-  // User wants to use all letters and special characters
-  else if(includeLowerCase && includeUpperCase && !includeNumbers && includeSpecialCharacters) {
-    
-    console.log("All Character Types!\n\n");
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, upperCaseLettersArray) ||
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, allLettersAndSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }  
-
-  // 12
-  // User wants to use numbers and special characters
-  else if(!includeLowerCase && !includeUpperCase && includeNumbers && includeSpecialCharacters) {
-    
-    console.log("All Character Types!\n\n");
-    while(!containsChecker(passwordArray, numbersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, numbersAndSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
-  // 13
-  // User wants to use lowercase letters, numbers, and special characters
-  else if(includeLowerCase && !includeUpperCase && includeNumbers && includeSpecialCharacters) {
-    
-    console.log("All Character Types!\n\n");
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) ||
-          !containsChecker(passwordArray, numbersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, lowersNumbersandSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
-  // 14
-  // User wants to use uppercase letters, numbers, and special characters
-  else if(!includeLowerCase && includeUpperCase && includeNumbers && includeSpecialCharacters) {
-    
-    console.log("All Character Types!\n\n");
-    while(!containsChecker(passwordArray, upperCaseLettersArray) ||
-          !containsChecker(passwordArray, numbersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, uppersNumbersandSpecialsArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
-  // 15
-  // User wants to use all character types
-  else if(includeLowerCase && includeUpperCase && includeNumbers && includeSpecialCharacters) {
-    
-    console.log("All Character Types!\n\n");
-    while(!containsChecker(passwordArray, lowerCaseLettersArray) || 
-          !containsChecker(passwordArray, upperCaseLettersArray) ||
-          !containsChecker(passwordArray, numbersArray) || 
-          !containsChecker(passwordArray, specialCharsArray)){
-
-      var password = generatePassword(lengthOfPassword, allCharactersArray);
-
-      ///////// 
-      // Just for log checks
-
-      console.log("password = " + password);
-
-      var passwordArray = password.split("");
-
-      console.log("Contains LC = " + containsChecker(passwordArray, lowerCaseLettersArray) + "\n" +
-                  "Contains UC = " + containsChecker(passwordArray, upperCaseLettersArray) + "\n" +
-                  "Contains Numbers = " + containsChecker(passwordArray, numbersArray) + "\n" +
-                  "Contains $ = " + containsChecker(passwordArray, specialCharsArray));
-    }
-    /////////
-  }
-
   /////////////////////////////
 
 
   // Writing the generated password to the html password box
-  var passwordText = document.querySelector("#password");
+  //var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  //passwordText.value = password;
 
 }
 
