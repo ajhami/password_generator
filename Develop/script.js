@@ -503,7 +503,7 @@ function writePassword() {
 
   // Writing the generated password to the html password box
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
+  console.clear();
 }
